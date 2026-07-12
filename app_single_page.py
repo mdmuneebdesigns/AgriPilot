@@ -89,7 +89,7 @@ st.markdown(CSS, unsafe_allow_html=True)
 # ==========================
 # API Setup
 # ==========================
-GEMINI_API_KEY = "GEMINI_API_KEY"
+GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
 WEATHER_API_KEY = "90975180569205a4e2ba07948d0e3280"
 genai.configure(api_key=GEMINI_API_KEY)
 
