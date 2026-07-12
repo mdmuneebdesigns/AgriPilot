@@ -1,0 +1,7 @@
+streamlit
+pandas
+scikit-learn
+google-generativeai
+pillow
+joblib
+#Google Collab me banaya he model Train kiya he tabhi version== nai dale beacause google colab new version pe data model ko train karta he"

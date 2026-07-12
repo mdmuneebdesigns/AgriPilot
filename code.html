@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AgriPilot - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "primary": "#006e2f",
+                      "on-tertiary-fixed": "#00210f",
+                      "on-surface-variant": "#3d4a3d",
+                      "on-tertiary-container": "#004b29",
+                      "surface-dim": "#d9dadb",
+                      "inverse-surface": "#2e3132",
+                      "surface-container": "#edeeef",
+                      "secondary-fixed-dim": "#ffb596",
+                      "surface": "#f8f9fa",
+                      "on-error-container": "#93000a",
+                      "on-background": "#191c1d",
+                      "tertiary-container": "#57c081",
+                      "outline": "#6d7b6c",
+                      "secondary-container": "#fe9e72",
+                      "tertiary-fixed-dim": "#73db9a",
+                      "primary-fixed-dim": "#4ae176",
+                      "primary-fixed": "#6bff8f",
+                      "tertiary": "#006d3e",
+                      "tertiary-fixed": "#8ff8b4",
+                      "on-secondary-fixed": "#360f00",
+                      "on-primary": "#ffffff",
+                      "secondary": "#944925",
+                      "inverse-on-surface": "#f0f1f2",
+                      "on-error": "#ffffff",
+                      "on-tertiary-fixed-variant": "#00522d",
+                      "surface-container-high": "#e7e8e9",
+                      "error": "#ba1a1a",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-container": "#773310",
+                      "outline-variant": "#bccbb9",
+                      "surface-container-highest": "#e1e3e4",
+                      "on-surface": "#191c1d",
+                      "on-primary-fixed-variant": "#005321",
+                      "on-primary-container": "#004b1e",
+                      "primary-container": "#22c55e",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#ffdbcd",
+                      "surface-variant": "#e1e3e4",
+                      "on-secondary": "#ffffff",
+                      "inverse-primary": "#4ae176",
+                      "surface-bright": "#f8f9fa",
+                      "surface-tint": "#006e2f",
+                      "surface-container-low": "#f3f4f5",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#76320f",
+                      "on-primary-fixed": "#002109",
+                      "background": "#f8f9fa"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "base": "4px",
+                      "grid-gutter": "16px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "xl": "32px",
+                      "sm": "8px",
+                      "lg": "24px",
+                      "grid-margin": "24px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #f8f9fa;
+        }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .input-glass {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(8px);
+            border: 1px solid #bccbb9;
+            transition: all 0.2s ease;
+        }
+        
+        .input-glass:focus {
+            border-color: #006e2f;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 110, 47, 0.1);
+        }
+
+        /* Custom Scrollbar for sleekness */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(109, 123, 108, 0.3);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(109, 123, 108, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-hidden h-screen flex">
+<!-- JSON Component: SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-outline-variant dark:border-outline shadow-md bg-white/70 dark:bg-inverse-surface/70 backdrop-blur-xl py-lg px-md z-50">
+<!-- Brand -->
+<div class="flex items-center gap-sm mb-xl">
+<span class="material-symbols-outlined text-primary text-3xl">agriculture</span>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">AgriPilot Pro</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Precision Management</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<ul class="flex flex-col gap-sm flex-1 font-body-md text-body-md">
+<!-- Active Tab: Dashboard -->
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-primary-container/20 hover:bg-surface-container-high/50 transition-colors transform scale-95 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="grass">grass</span>
+<span>Soil Analysis</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="sanitizer">sanitizer</span>
+<span>Plant Health</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span>Field Maps</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high/50 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</li>
+</ul>
+<!-- Local Context Widget (Weather/Location) -->
+<div class="mt-auto mb-lg p-md bg-surface-container-lowest/50 rounded-xl border border-outline-variant">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-sm">Local Conditions</h3>
+<div class="relative mb-md">
+<span class="material-symbols-outlined absolute left-3 top-2.5 text-outline text-sm">location_on</span>
+<input class="w-full pl-8 pr-3 py-2 rounded-lg input-glass font-body-md text-body-md text-on-surface" placeholder="City or Region" type="text" value="Sacramento Valley"/>
+</div>
+<div class="flex justify-between items-center bg-white/40 p-sm rounded-lg">
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-secondary">thermostat</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">24°C</span>
+</div>
+<div class="h-6 w-px bg-outline-variant mx-sm"></div>
+<div class="flex items-center gap-sm">
+<span class="material-symbols-outlined text-tertiary-container">water_drop</span>
+<span class="font-body-md text-body-md font-semibold text-on-surface">65%</span>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<button class="w-full py-sm rounded-lg bg-gradient-to-r from-primary to-primary-container text-white font-label-md text-label-md shadow-md hover:shadow-lg transition-all flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined">add</span>
+            New Analysis
+        </button>
+<!-- User Profile (Bottom) -->
+<div class="mt-lg pt-md border-t border-outline-variant flex items-center gap-sm">
+<img alt="User profile picture" class="w-10 h-10 rounded-full object-cover border border-outline-variant" data-alt="A close-up portrait of a professional agronomist wearing a collared shirt, subtly smiling. Shot in natural, soft daylight with a blurred agricultural field in the background, creating a bright, modern, and optimistic light-mode aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNjeuZcfPkMA3bzEG6ryxpzjhO4IvsgnHDSTm-3I-T94W8wb1XNvPyjRYbgvfFvmzAv2SasR-WGN3426sUDv_A_E_QhkN-Me28NTK_a669e_9Rsi_LNjgtP0Hl1YIc_5Rc8L_t9PjNi2Z2JUNce598_wtMQ9pc6o7femYQhRsYLFHFfDe3acZ38EzY4phKDUjF8ej_ejPHW-UeZQkY6LLQGX5fXRQhgnzuByGVIPjWiWu2QTGvN__c-cpdjV_PbBlxsMNmXIQKdmQ"/>
+<div class="flex-1">
+<p class="font-label-md text-label-md font-semibold text-on-surface">Dr. E. Vance</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Lead Agronomist</p>
+</div>
+</div>
+</nav>
+<!-- JSON Component: TopNavBar -->
+<header class="hidden md:flex fixed top-0 right-0 w-[calc(100%-16rem)] z-40 bg-white/80 dark:bg-inverse-surface/80 backdrop-blur-md border-b border-outline-variant dark:border-outline shadow-sm flex justify-between items-center px-lg h-16">
+<!-- Navigation Links -->
+<nav>
+<ul class="flex gap-lg font-label-md text-label-md">
+<li><a class="text-primary border-b-2 border-primary pb-1 font-semibold hover:opacity-80 transition-opacity" href="#">Overview</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-opacity" href="#">Reports</a></li>
+<li><a class="text-on-surface-variant dark:text-surface-variant hover:text-primary transition-opacity" href="#">Inventory</a></li>
+</ul>
+</nav>
+<!-- Right Side Actions -->
+<div class="flex items-center gap-lg">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-2 text-outline text-sm">search</span>
+<input class="pl-9 pr-4 py-1.5 rounded-full input-glass font-body-md text-body-md text-sm w-64" placeholder="Search data..." type="text"/>
+</div>
+<div class="flex items-center gap-sm text-primary dark:text-primary-fixed-dim">
+<button class="p-sm rounded-full hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-sm rounded-full hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-0 md:ml-64 mt-0 md:mt-16 w-full h-[calc(100vh-64px)] overflow-y-auto pb-32">
+<div class="p-lg md:p-xl max-w-7xl mx-auto space-y-grid-gutter">
+<!-- Page Header -->
+<div class="mb-lg">
+<h2 class="font-headline-lg text-headline-lg font-semibold text-on-surface">Analysis Dashboard</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Review real-time telemetry and approve AI diagnostic reports.</p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-grid-gutter">
+<!-- Step 1: Soil & Weather Analysis (Span 7 cols) -->
+<div class="col-span-1 lg:col-span-7 glass-panel rounded-xl p-lg flex flex-col h-full relative overflow-hidden">
+<!-- Subtle background decoration -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-primary-container opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="flex items-center gap-sm mb-lg">
+<div class="w-8 h-8 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">science</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Soil &amp; Weather Analysis</h3>
+<span class="ml-auto bg-primary-container/20 text-primary px-sm py-xs rounded-md font-label-sm text-label-sm">Step 1</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-md mb-lg flex-1">
+<!-- Input Group N -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant pl-1">Nitrogen (N) mg/kg</label>
+<input class="w-full px-md py-sm rounded-lg input-glass font-body-md text-body-md text-on-surface font-semibold text-center" type="number" value="120"/>
+</div>
+<!-- Input Group P -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant pl-1">Phosphorus (P) mg/kg</label>
+<input class="w-full px-md py-sm rounded-lg input-glass font-body-md text-body-md text-on-surface font-semibold text-center" type="number" value="45"/>
+</div>
+<!-- Input Group K -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant pl-1">Potassium (K) mg/kg</label>
+<input class="w-full px-md py-sm rounded-lg input-glass font-body-md text-body-md text-on-surface font-semibold text-center" type="number" value="180"/>
+</div>
+<!-- Input Group pH -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant pl-1">Soil pH Level</label>
+<input class="w-full px-md py-sm rounded-lg input-glass font-body-md text-body-md text-on-surface font-semibold text-center" step="0.1" type="number" value="6.5"/>
+</div>
+<!-- Input Group Rainfall -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant pl-1">Est. Rainfall (mm)</label>
+<input class="w-full px-md py-sm rounded-lg input-glass font-body-md text-body-md text-on-surface font-semibold text-center" type="number" value="110"/>
+</div>
+</div>
+<!-- Recommendation Box -->
+<div class="mt-auto pt-md border-t border-outline-variant">
+<p class="font-label-sm text-label-sm text-on-surface-variant mb-sm">AI Recommendation based on current telemetry:</p>
+<div class="bg-primary-container/10 border-2 border-primary-container rounded-lg p-md flex items-center justify-between">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+<div>
+<h4 class="font-headline-md text-headline-md font-bold text-primary">Maize (Optimal)</h4>
+<p class="font-label-sm text-label-sm text-primary/70">Confidence: 94%</p>
+</div>
+</div>
+<button class="px-md py-sm bg-white border border-primary text-primary rounded-md font-label-md text-label-md hover:bg-primary/5 transition-colors">
+                                View Alternatives
+                            </button>
+</div>
+</div>
+</div>
+<!-- Step 2: Plant Health Inspection (Span 5 cols) -->
+<div class="col-span-1 lg:col-span-5 glass-panel rounded-xl p-lg flex flex-col h-full">
+<div class="flex items-center gap-sm mb-md">
+<div class="w-8 h-8 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">local_florist</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Plant Health</h3>
+<span class="ml-auto bg-primary-container/20 text-primary px-sm py-xs rounded-md font-label-sm text-label-sm">Step 2</span>
+</div>
+<!-- Drag & Drop Zone -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl bg-surface-container-lowest/50 p-lg text-center mb-md hover:bg-primary-container/5 hover:border-primary transition-colors cursor-pointer flex flex-col items-center justify-center min-h-[140px]">
+<span class="material-symbols-outlined text-outline text-4xl mb-sm">cloud_upload</span>
+<p class="font-label-md text-label-md text-on-surface">Drag &amp; drop field imagery here</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Supports JPG, PNG for leaf analysis</p>
+</div>
+<!-- Report Area -->
+<div class="flex-1 flex flex-col">
+<label class="font-label-md text-label-md font-semibold text-on-surface mb-sm">AI Diagnostic Report</label>
+<textarea class="w-full flex-1 min-h-[150px] p-md rounded-lg input-glass font-body-md text-body-md text-on-surface resize-none leading-relaxed" readonly="">Diagnostic Run: 10:42 AM
+Target: Sector 7G Sample
+
+Findings:
+- Mild chlorosis detected on lower leaves.
+- Nitrogen deficiency highly probable (matches soil telemetry).
+- No signs of fungal infection (e.g., rust or blight).
+
+Action Plan:
+Recommend targeted application of Urea (46-0-0) at 50kg/ha within the next 48 hours before forecasted precipitation.</textarea>
+</div>
+</div>
+</div>
+<!-- Spacer to ensure content doesn't hide behind HITL panel -->
+<div class="h-24"></div>
+</div>
+</main>
+<!-- HITL Panel (Bottom Floating) -->
+<div class="fixed bottom-0 md:bottom-lg left-0 md:left-[17rem] right-0 md:right-lg glass-panel rounded-t-xl md:rounded-xl p-md border-t md:border border-outline-variant z-40 shadow-[0_-4px_24px_rgba(0,0,0,0.05)]">
+<div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center gap-md justify-between">
+<div class="flex-1 w-full flex items-center gap-md">
+<div class="flex-1">
+<label class="sr-only">Agronomist Feedback</label>
+<input class="w-full px-md py-2 rounded-lg input-glass font-body-md text-body-md text-on-surface border-outline-variant/50" placeholder="Add human-in-the-loop feedback or modifications before approval..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md w-full sm:w-auto mt-sm sm:mt-0">
+<button class="flex-1 sm:flex-none px-xl py-2 rounded-lg bg-white border border-error text-error font-label-md text-label-md font-semibold hover:bg-error/5 transition-colors flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined text-sm">close</span>
+                    Reject
+                </button>
+<button class="flex-1 sm:flex-none px-xl py-2 rounded-lg bg-gradient-to-r from-primary to-primary-fixed-dim text-white font-label-md text-label-md font-semibold shadow-md hover:shadow-lg transition-all flex justify-center items-center gap-sm">
+<span class="material-symbols-outlined text-sm">check</span>
+                    Approve Plan
+                </button>
+</div>
+</div>
+</div>
+</body></html>
