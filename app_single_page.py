@@ -113,18 +113,31 @@ def get_weather(city_name):
 
 def generate_vision_report(prompt, image_obj):
     try:
-        # Pehle hum sab se powerful PRO model try karenge
-        vision_model = genai.GenerativeModel('gemini-1.5-pro')
+        # 1. Google se on-the-spot available models ki list mangwayen
+        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        
+        selected_model_name = None
+        
+        # 2. List mein se sabse behtareen Gemini model khud select karein
+        for name in available_models:
+            if 'gemini' in name:
+                # 'models/gemini-xxx' mein se 'models/' hata kar sirf naam nikalna
+                selected_model_name = name.replace('models/', '')
+                
+                # Agar pro ya flash mil jaye toh fauran usay lock kar dein
+                if 'pro' in selected_model_name or 'flash' in selected_model_name:
+                    break 
+                    
+        if not selected_model_name:
+            return "Error: Aapki API key par koi image-supported Gemini model available nahi hai."
+
+        # 3. Jo model select hua, us par report generate karein
+        vision_model = genai.GenerativeModel(selected_model_name)
         response = vision_model.generate_content([prompt, image_obj])
         return response.text
-    except Exception:
-        try:
-            # Agar kisi wajah se Pro fail ho (jaise limit cross ho), toh backup mein Flash chalega
-            vision_model = genai.GenerativeModel('gemini-1.5-flash')
-            response = vision_model.generate_content([prompt, image_obj])
-            return response.text
-        except Exception as e:
-            return f"Error generating vision report: {e}"
+
+    except Exception as e:
+        return f"System Error: {e}"
 
 
 # ==========================
