@@ -92,7 +92,7 @@ st.markdown(CSS, unsafe_allow_html=True)
 # ==========================
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
 WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "").strip()
-MODEL_CANDIDATES = ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"]
+MODEL_CANDIDATES = ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.1-pro"]
 
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
