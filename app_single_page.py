@@ -90,10 +90,12 @@ st.markdown(CSS, unsafe_allow_html=True)
 # ==========================
 # API Setup
 # ==========================
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AQ.Ab8RN6I75j6o1s5O6_el3cqT4iKka3bhmRBjF7xSrxmrOrRBug")
-WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "90975180569205a4e2ba07948d0e3280")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "").strip()
 MODEL_CANDIDATES = ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"]
-genai.configure(api_key=GEMINI_API_KEY)
+
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 
 @st.cache_resource
@@ -114,6 +116,9 @@ def get_weather(city_name):
 
 
 def generate_vision_report(prompt, image_obj):
+    if not GEMINI_API_KEY:
+        return "Gemini API key is not configured. Set the GEMINI_API_KEY environment variable and restart the app."
+
     last_error = None
     for model_name in MODEL_CANDIDATES:
         try:
