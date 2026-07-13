@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import joblib
 import pandas as pd
@@ -89,8 +90,9 @@ st.markdown(CSS, unsafe_allow_html=True)
 # ==========================
 # API Setup
 # ==========================
-GEMINI_API_KEY = st.secrets["GEMINI_API_KEY"]
-WEATHER_API_KEY = "90975180569205a4e2ba07948d0e3280"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "AQ.Ab8RN6I75j6o1s5O6_el3cqT4iKka3bhmRBjF7xSrxmrOrRBug")
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "90975180569205a4e2ba07948d0e3280")
+MODEL_CANDIDATES = ["gemini-2.0-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"]
 genai.configure(api_key=GEMINI_API_KEY)
 
 
@@ -112,32 +114,16 @@ def get_weather(city_name):
 
 
 def generate_vision_report(prompt, image_obj):
-    try:
-        # 1. Google se on-the-spot available models ki list mangwayen
-        available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
-        
-        selected_model_name = None
-        
-        # 2. List mein se sabse behtareen Gemini model khud select karein
-        for name in available_models:
-            if 'gemini' in name:
-                # 'models/gemini-xxx' mein se 'models/' hata kar sirf naam nikalna
-                selected_model_name = name.replace('models/', '')
-                
-                # Agar pro ya flash mil jaye toh fauran usay lock kar dein
-                if 'pro' in selected_model_name or 'flash' in selected_model_name:
-                    break 
-                    
-        if not selected_model_name:
-            return "Error: Aapki API key par koi image-supported Gemini model available nahi hai."
+    last_error = None
+    for model_name in MODEL_CANDIDATES:
+        try:
+            vision_model = genai.GenerativeModel(model_name)
+            response = vision_model.generate_content([prompt, image_obj])
+            return response.text
+        except Exception as e:
+            last_error = e
 
-        # 3. Jo model select hua, us par report generate karein
-        vision_model = genai.GenerativeModel(selected_model_name)
-        response = vision_model.generate_content([prompt, image_obj])
-        return response.text
-
-    except Exception as e:
-        return f"System Error: {e}"
+    return f"Error generating vision report: {last_error}"
 
 
 # ==========================
