@@ -113,12 +113,14 @@ def get_weather(city_name):
 
 def generate_vision_report(prompt, image_obj):
     try:
-        vision_model = genai.GenerativeModel('gemini-3.5-flash')
+        # Pehle hum sab se powerful PRO model try karenge
+        vision_model = genai.GenerativeModel('gemini-1.5-pro')
         response = vision_model.generate_content([prompt, image_obj])
         return response.text
     except Exception:
         try:
-            vision_model = genai.GenerativeModel('gemini-3.1-pro')
+            # Agar kisi wajah se Pro fail ho (jaise limit cross ho), toh backup mein Flash chalega
+            vision_model = genai.GenerativeModel('gemini-1.5-flash')
             response = vision_model.generate_content([prompt, image_obj])
             return response.text
         except Exception as e:
