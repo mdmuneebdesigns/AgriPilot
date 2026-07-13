@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import joblib
 import pandas as pd
@@ -89,9 +90,12 @@ st.markdown(CSS, unsafe_allow_html=True)
 # ==========================
 # API Setup
 # ==========================
-GEMINI_API_KEY = "GEMINI_API_KEY"
-WEATHER_API_KEY = "90975180569205a4e2ba07948d0e3280"
-genai.configure(api_key=GEMINI_API_KEY)
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "").strip()
+WEATHER_API_KEY = os.getenv("WEATHER_API_KEY", "").strip()
+MODEL_CANDIDATES = ["gemini-3.1-flash-lite", "gemini-3.5-flash", "gemini-3.1-pro"]
+
+if GEMINI_API_KEY:
+    genai.configure(api_key=GEMINI_API_KEY)
 
 
 @st.cache_resource
@@ -112,26 +116,36 @@ def get_weather(city_name):
 
 
 def generate_vision_report(prompt, image_obj):
+    if not GEMINI_API_KEY:
+        return "Gemini API key is not configured. Set the GEMINI_API_KEY environment variable and restart the app."
+    
+    last_error = None
+    
+    # 1. Pehle MODEL_CANDIDATES mein se models try karein
+    for model_name in MODEL_CANDIDATES:
+        try:
+            vision_model = genai.GenerativeModel(model_name)
+            response = vision_model.generate_content([prompt, image_obj])
+            return response.text
+        except Exception as e:
+            last_error = e
+            continue
+    
+    # 2. Agar candidates nahi chale, to dynamic selection karein
     try:
-        # 1. Google se on-the-spot available models ki list mangwayen
         available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
         
         selected_model_name = None
         
-        # 2. List mein se sabse behtareen Gemini model khud select karein
         for name in available_models:
             if 'gemini' in name:
-                # 'models/gemini-xxx' mein se 'models/' hata kar sirf naam nikalna
                 selected_model_name = name.replace('models/', '')
-                
-                # Agar pro ya flash mil jaye toh fauran usay lock kar dein
                 if 'pro' in selected_model_name or 'flash' in selected_model_name:
                     break 
                     
         if not selected_model_name:
-            return "Error: Aapki API key par koi image-supported Gemini model available nahi hai."
+            return f"Error: Aapki API key par koi image-supported Gemini model available nahi hai. Last error: {last_error}"
 
-        # 3. Jo model select hua, us par report generate karein
         vision_model = genai.GenerativeModel(selected_model_name)
         response = vision_model.generate_content([prompt, image_obj])
         return response.text
